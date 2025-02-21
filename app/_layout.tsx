@@ -1,39 +1,28 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { Drawer } from "expo-router/drawer";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+function Layout() {
+    return (
+        <Drawer
+            screenOptions={{
+                headerStyle: { backgroundColor: "rgba(0,81,255,0.85)" }, // Синий хедер
+                headerTintColor: "#fff", // Белый текст в хедере
+                drawerActiveTintColor: "#002aff", // Синий активный элемент
+                drawerInactiveTintColor: "#333", // Темно-серый неактивный
+                drawerLabelStyle: { fontSize: 18, fontWeight: "bold" },
+                drawerStyle: { backgroundColor: "#F0F8FF", width: 300 }, // Светло-голубой фон меню
+                drawerItemStyle: { paddingVertical: 12 }, // Увеличил отступы
+            }}
+        >
+            <Drawer.Screen name="index" options={{ title: "🏠 Ssau Guru" }} />
+            <Drawer.Screen name="events" options={{ title: "📅 События" }} />
+            <Drawer.Screen name="map" options={{ title: "🗺 Карта" }} />
+            <Drawer.Screen name="3dmap" options={{ title: "3D Карта университета" }} />
+            <Drawer.Screen name="knowledge" options={{ title: "📖 База знаний" }} />
+            <Drawer.Screen name="mentorship" options={{ title: "🤝 Менторство" }} />
+            <Drawer.Screen name="contacts" options={{ title: "📞 Контакты дирекции" }} />
+            <Drawer.Screen name="settings" options={{ title: "⚙️ Настройки" }} />
+        </Drawer>
+    );
 }
+
+export default Layout;
