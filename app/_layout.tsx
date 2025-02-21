@@ -13,6 +13,7 @@ function Layout() {
                 drawerItemStyle: { paddingVertical: 12 }, // Увеличил отступы
             }}
         >
+
             <Drawer.Screen name="index" options={{ title: "🏠 Ssau Guru" }} />
             <Drawer.Screen name="events" options={{ title: "📅 События" }} />
             <Drawer.Screen name="map" options={{ title: "🗺 Карта" }} />
